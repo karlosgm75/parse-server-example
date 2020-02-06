@@ -3,18 +3,6 @@
 
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
-var ParseDashboard = require('parse-dashboard');
-
-var dashboard = new ParseDashboard({
-  apps: [
-    {
-      appId: process.env.APP_ID || 'myAppId',
-      masterKey: process.env.MASTER_KEY || 'myMasterKey',
-      serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',
-      appName: process.env.APP_NAME || 'MyApp',
-    },
-  ],
-});
 var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -38,7 +26,7 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
-app.use('/dash', dashboard);
+
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
